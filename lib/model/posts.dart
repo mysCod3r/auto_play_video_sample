@@ -98,4 +98,124 @@ final List<PostMediaModel> allPosts = [
     imageUrl: 'https://fastly.picsum.photos/id/667/400/400.jpg?hmac=P7DonQtS3AObPeVCqniDzodFr6hAhmD_9tbp27TO-Ec',
     soundUrl: 'https://cdn.pixabay.com/audio/2023/08/26/audio_283bb586f1.mp3',
   ),
+  VideoModel(
+    id: '101',
+    contentText: 'Video model 101',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Ff0bc26e4-455c-4cae-b7bd-564a7a1262421697700299712024524.mp4',
+  ),
+  VideoModel(
+    id: '102',
+    contentText: 'Video model 102',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F79e49ecc-b9f0-4463-8507-74d1c392faf81697061093944277198.mp4',
+  ),
+  VideoModel(
+    id: '103',
+    contentText: 'Video model 103',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Fef687c14-228d-4f8e-affb-abba4ac3c4331697061078353703851.mp4',
+  ),
+  VideoModel(
+    id: '104',
+    contentText: 'Video model 104',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F821850b0-36ee-40f6-9304-d2a1ad6fbc671697061062707111011.mp4',
+  ),
+  VideoModel(
+    id: '105',
+    contentText: 'Video model 105',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F2357a14b-b321-42ab-85cc-d688a517d5471697061048216353117.mp4',
+  ),
+  VideoModel(
+    id: '106',
+    contentText: 'Video model 106',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F4b52c819-a49b-4b14-b159-bddba246162a1697061026192353119.mp4',
+  ),
+  VideoModel(
+    id: '107',
+    contentText: 'Video model 107',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F29a9471b-e3d5-47ae-86df-eea54839e8e71697061000726120931.mp4',
+  ),
+  VideoModel(
+    id: '108',
+    contentText: 'Video model 108',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Fce37a59c-d159-4e89-89dd-88f69685753c1697060982742825352.mp4',
+  ),
+  VideoModel(
+    id: '109',
+    contentText: 'Video model 109',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F686a76fd-278a-487f-ac65-5bd555bb99051697060963513429771.mp4',
+  ),
+  VideoModel(
+    id: '110',
+    contentText: 'Video model 110',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F7c1b5c41-6dd7-4e48-bdd7-ff5ccf8e1c821697060946880817270.mp4',
+  ),
+  VideoModel(
+    id: '111',
+    contentText: 'Video model 111',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Ff55241f9-4674-4074-9b62-894cb9dc1fc81697060932383205044.mp4',
+  ),
+  VideoModel(
+    id: '112',
+    contentText: 'Video model 112',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F71c573ac-f018-4955-8461-120891c8c7b81697060912406472874.mp4',
+  ),
+  VideoModel(
+    id: '113',
+    contentText: 'Video model 113',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Fd2de4250-8324-4e6e-83a6-2c38d88d27d81697060413487392774.mp4',
+  ),
+  VideoModel(
+    id: '114',
+    contentText: 'Video model 114',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F55e10c90-3787-484f-a561-63eb8459a5fc1697060139312886586.mp4',
+  ),
+  VideoModel(
+    id: '115',
+    contentText: 'Video model 115',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Fe8de16d7-bd01-45b3-bc26-92545b22320e1697060028713075196.mp4',
+  ),
+  VideoModel(
+    id: '116',
+    contentText: 'Video model 116',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2Fef687c14-228d-4f8e-affb-abba4ac3c4331697061078353703851.mp4',
+  ),
+  VideoModel(
+    id: '117',
+    contentText: 'Video model 117',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F821850b0-36ee-40f6-9304-d2a1ad6fbc671697061062707111011.mp4',
+  ),
+  VideoModel(
+    id: '118',
+    contentText: 'Video model 118',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F2357a14b-b321-42ab-85cc-d688a517d5471697061048216353117.mp4',
+  ),
+  VideoModel(
+    id: '119',
+    contentText: 'Video model 119',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F4b52c819-a49b-4b14-b159-bddba246162a1697061026192353119.mp4',
+  ),
+  VideoModel(
+    id: '120',
+    contentText: 'Video model 120',
+    videoUrl:
+        'https://zirvafilebucket.s3.eu-central-1.amazonaws.com/videos%2F29a9471b-e3d5-47ae-86df-eea54839e8e71697061000726120931.mp4',
+  ),
 ];

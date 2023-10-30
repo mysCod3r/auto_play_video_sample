@@ -21,6 +21,12 @@ class _ContentVideoCardState extends State<ContentVideoCard> {
   VideoPlayerModel get _model => MediaKitManager.instance.getVideoPlayerModelFromPostModel(widget.model);
 
   @override
+  void dispose() {
+    _model.player.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(

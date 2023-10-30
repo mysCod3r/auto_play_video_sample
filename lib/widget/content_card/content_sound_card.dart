@@ -1,4 +1,5 @@
 import 'package:auto_play_video_sample/manager/media_kit_manager.dart';
+import 'package:auto_play_video_sample/manager/media_kit_model.dart';
 import 'package:auto_play_video_sample/model/media_model.dart';
 import 'package:auto_play_video_sample/view/post_detail_view.dart';
 import 'package:auto_play_video_sample/widget/content_widget/sound_widget.dart';
@@ -14,10 +15,12 @@ class ContentSoundCard extends StatefulWidget {
 }
 
 class _ContentSoundCardState extends State<ContentSoundCard> {
+  SoundPlayerModel get _model => MediaKitManager.instance.getSoundPlayerModelFromPostModel(widget.model);
+
   @override
-  void initState() {
-    super.initState();
-    MediaKitManager.instance.getSoundPlayerModelFromPostModel(widget.model);
+  void dispose() {
+    _model.player.dispose();
+    super.dispose();
   }
 
   @override
