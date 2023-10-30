@@ -1,19 +1,34 @@
+import 'package:auto_play_video_sample/manager/media_kit_manager.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
-sealed class MediaKitModel {
-  const MediaKitModel({required this.id, required this.player});
+abstract class Playable {
+  Playable({
+    required this.id,
+    required this.player,
+    required this.source,
+    this.placeholder,
+  });
 
   final String id;
-  final Player player;
+  final CustomPlayer player;
+  final String source;
+  final String? placeholder;
 }
 
-final class SoundPlayerModel extends MediaKitModel {
-  const SoundPlayerModel({required super.id, required super.player});
-}
+class PlayItem extends Playable {
+  PlayItem({
+    required this.id,
+    required this.player,
+    required this.source,
+    this.placeholder,
+  });
 
-final class VideoPlayerModel extends MediaKitModel {
-  const VideoPlayerModel({required super.id, required super.player, required this.controller});
-
-  final VideoController controller;
+  factory PlayItem.createFromPost(String post) {
+    return PlayItem(
+      id: post.id,
+      player: CustomPlayer(post.uri),
+      source: post.uri,
+    );
+  }
 }

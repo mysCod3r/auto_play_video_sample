@@ -15,7 +15,8 @@ class ContentSoundCard extends StatefulWidget {
 }
 
 class _ContentSoundCardState extends State<ContentSoundCard> {
-  SoundPlayerModel get _model => MediaKitManager.instance.getSoundPlayerModelFromPostModel(widget.model);
+  PlayerModel get _model =>
+      MediaKitManager.instance.getSoundPlayerModelFromPostModel(widget.model);
 
   @override
   void dispose() {
@@ -27,7 +28,8 @@ class _ContentSoundCardState extends State<ContentSoundCard> {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () => context.route.navigateToPage(PostDetailView(post: widget.model)),
+        onTap: () =>
+            context.route.navigateToPage(PostDetailView(post: widget.model)),
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(

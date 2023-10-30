@@ -5,6 +5,7 @@ import 'package:auto_play_video_sample/widget/content_widget/sound_widget.dart';
 import 'package:auto_play_video_sample/widget/content_widget/video_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class PostDetailView extends StatefulWidget {
   const PostDetailView({required this.post, super.key});
@@ -17,9 +18,11 @@ class _PostDetailViewState extends State<PostDetailView> {
   MediaKitModel? get _mediaKitModel {
     switch (widget.post) {
       case VideoModel():
-        return MediaKitManager.instance.getVideoPlayerModelFromPostModel(widget.post as VideoModel);
+        return MediaKitManager.instance
+            .getVideoPlayerModelFromPostModel(widget.post as VideoModel);
       case SoundModel():
-        return MediaKitManager.instance.getSoundPlayerModelFromPostModel(widget.post as SoundModel);
+        return MediaKitManager.instance
+            .getSoundPlayerModelFromPostModel(widget.post as SoundModel);
       case NoMediaModel():
         return null;
     }
@@ -31,7 +34,8 @@ class _PostDetailViewState extends State<PostDetailView> {
       appBar: AppBar(),
       body: Column(
         children: [
-          if (_mediaKitModel != null) _ContentMedia(mediaKitModel: _mediaKitModel!, post: widget.post),
+          if (_mediaKitModel != null)
+            _ContentMedia(mediaKitModel: _mediaKitModel!, post: widget.post),
           Container(
             color: Colors.cyanAccent,
             height: 50,
@@ -51,23 +55,32 @@ class _ContentMedia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (mediaKitModel) {
-      VideoPlayerModel() => _VideoWidget(mediaKitModel as VideoPlayerModel),
-      SoundPlayerModel() => _SoundWidget(post as SoundModel),
+      PlayerModel() => _VideoWidget(mediaKitModel as PlayerModel),
+      PlayerModel() => _SoundWidget(post as SoundModel),
     };
   }
 }
 
-class _VideoWidget extends StatelessWidget {
+class _VideoWidget extends StatefulWidget {
   const _VideoWidget(this.mediaKitModel);
-  final VideoPlayerModel mediaKitModel;
+  final PlayerModel mediaKitModel;
+
+  @override
+  State<_VideoWidget> createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<_VideoWidget> {
+  late final VideoController controller =
+      VideoController(widget.mediaKitModel.player);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: context.sized.width,
       width: context.sized.width,
       child: VideoWidget.square(
-        id: mediaKitModel.id,
-        controller: mediaKitModel.controller,
+        id: widget.mediaKitModel.id,
+        controller: controller,
         borderRadius: BorderRadius.circular(16),
       ),
     );

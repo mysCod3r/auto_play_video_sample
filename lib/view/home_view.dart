@@ -14,8 +14,10 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin {
-  final ItemPositionsListener _itemPositionsListener = ItemPositionsListener.create();
+class _HomeViewState extends State<HomeView>
+    with AutomaticKeepAliveClientMixin {
+  final ItemPositionsListener _itemPositionsListener =
+      ItemPositionsListener.create();
 
   @override
   void initState() {
@@ -31,7 +33,8 @@ class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin 
           return (curr - 1).abs() < (close - 1).abs() ? current : closest;
         });
 
-        if (MediaKitManager.instance.currentPlayingId != allPosts[closestToMiddle.index].id) {
+        if (MediaKitManager.instance.currentPlayingId !=
+            allPosts[closestToMiddle.index].id) {
           MediaKitManager.instance
             ..pause()
             ..setPlayer(id: allPosts[closestToMiddle.index].id)
@@ -50,12 +53,16 @@ class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin 
           itemPositionsListener: _itemPositionsListener,
           separatorBuilder: (_, __) => const Divider(height: 32),
           itemCount: allPosts.length,
+          minCacheExtent: 0,
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
             return switch (allPosts[index]) {
-              VideoModel() => ContentVideoCard(model: allPosts[index] as VideoModel),
-              SoundModel() => ContentSoundCard(model: allPosts[index] as SoundModel),
-              NoMediaModel() => ContentTextCard(model: allPosts[index] as NoMediaModel),
+              VideoModel() =>
+                ContentVideoCard(model: allPosts[index] as VideoModel),
+              SoundModel() =>
+                ContentSoundCard(model: allPosts[index] as SoundModel),
+              NoMediaModel() =>
+                ContentTextCard(model: allPosts[index] as NoMediaModel),
             };
           },
         ),

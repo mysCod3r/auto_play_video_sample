@@ -5,6 +5,7 @@ import 'package:auto_play_video_sample/view/post_detail_view.dart';
 import 'package:auto_play_video_sample/widget/content_widget/video_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class ContentVideoCard extends StatefulWidget {
   const ContentVideoCard({
@@ -18,11 +19,15 @@ class ContentVideoCard extends StatefulWidget {
 }
 
 class _ContentVideoCardState extends State<ContentVideoCard> {
-  VideoPlayerModel get _model => MediaKitManager.instance.getVideoPlayerModelFromPostModel(widget.model);
+  PlayerModel get _model =>
+      MediaKitManager.instance.getVideoPlayerModelFromPostModel(widget.model);
+  late final VideoController controller = VideoController(_model.player);
 
   @override
   void dispose() {
-    _model.player.dispose();
+    if (_model.player.mounted) {
+      _model.player.dispose();
+    }
     super.dispose();
   }
 
@@ -30,7 +35,8 @@ class _ContentVideoCardState extends State<ContentVideoCard> {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () => context.route.navigateToPage(PostDetailView(post: widget.model)),
+        onTap: () =>
+            context.route.navigateToPage(PostDetailView(post: widget.model)),
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
@@ -50,7 +56,7 @@ class _ContentVideoCardState extends State<ContentVideoCard> {
                 width: context.sized.width,
                 child: VideoWidget.square(
                   id: widget.model.id,
-                  controller: _model.controller,
+                  controller: controller,
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
