@@ -113,7 +113,7 @@ class CustomPlayer extends Player with EquatableMixin {
   static const _duration = Duration(seconds: 1);
 
   Future<void> init() async {
-    await operation.value.whenComplete(() async {
+    await operation.value.then((_) async {
       await open(Media(resource), play: false);
       await videoController.notifier.value?.waitUntilFirstFrameRendered;
       isInitialized.value = true;
