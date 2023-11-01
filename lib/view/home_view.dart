@@ -1,6 +1,6 @@
 import 'package:auto_play_video_sample/manager/media_kit_manager.dart';
-import 'package:auto_play_video_sample/model/media_model.dart';
-import 'package:auto_play_video_sample/model/posts.dart';
+import 'package:auto_play_video_sample/model/dummy_posts.dart';
+import 'package:auto_play_video_sample/model/post.dart';
 import 'package:auto_play_video_sample/widget/content_card/content_sound_card.dart';
 import 'package:auto_play_video_sample/widget/content_card/content_text_card.dart';
 import 'package:auto_play_video_sample/widget/content_card/content_video_card.dart';
@@ -50,12 +50,13 @@ class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin 
           itemPositionsListener: _itemPositionsListener,
           separatorBuilder: (_, __) => const Divider(height: 32),
           itemCount: allPosts.length,
+          minCacheExtent: 0,
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
-            return switch (allPosts[index]) {
-              VideoModel() => ContentVideoCard(model: allPosts[index] as VideoModel),
-              SoundModel() => ContentSoundCard(model: allPosts[index] as SoundModel),
-              NoMediaModel() => ContentTextCard(model: allPosts[index] as NoMediaModel),
+            return switch (allPosts[index].contentType) {
+              ContentType.video => ContentVideoCard(post: allPosts[index]),
+              ContentType.sound => ContentSoundCard(post: allPosts[index]),
+              ContentType.noMedia => ContentTextCard(post: allPosts[index]),
             };
           },
         ),
