@@ -1,5 +1,5 @@
 import 'package:auto_play_video_sample/manager/media_kit_manager.dart';
-import 'package:auto_play_video_sample/model/posts.dart';
+import 'package:auto_play_video_sample/model/dummy_posts.dart';
 import 'package:auto_play_video_sample/widget/content_card/content_video_card.dart';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -46,7 +46,7 @@ class _ProfileViewState extends State<ProfileView> with AutomaticKeepAliveClient
           itemCount: videoPosts.length,
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
-            return ContentVideoCard(model: videoPosts[index]);
+            return ContentVideoCard(post: videoPosts[index]);
           },
         ),
       ),

@@ -1,34 +1,34 @@
 import 'package:auto_play_video_sample/manager/media_kit_manager.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:auto_play_video_sample/model/post.dart';
 
 abstract class Playable {
   Playable({
     required this.id,
     required this.player,
     required this.source,
-    this.placeholder,
+    required this.placeholder,
   });
 
   final String id;
   final CustomPlayer player;
   final String source;
-  final String? placeholder;
+  final String placeholder;
 }
 
 class PlayItem extends Playable {
   PlayItem({
-    required this.id,
-    required this.player,
-    required this.source,
-    this.placeholder,
+    required super.id,
+    required super.player,
+    required super.source,
+    required super.placeholder,
   });
 
-  factory PlayItem.createFromPost(String post) {
+  factory PlayItem.createFromPost(Post post) {
     return PlayItem(
       id: post.id,
-      player: CustomPlayer(post.uri),
-      source: post.uri,
+      player: CustomPlayer(post.url),
+      source: post.url,
+      placeholder: post.placeholder,
     );
   }
 }

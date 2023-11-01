@@ -1,11 +1,11 @@
-import 'package:auto_play_video_sample/manager/media_kit_model.dart';
-import 'package:auto_play_video_sample/model/media_model.dart';
+import 'package:async/async.dart';
+import 'package:auto_play_video_sample/model/playable.dart' as pl;
+import 'package:auto_play_video_sample/model/post.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import 'package:async/async.dart';
 
 class MediaKitManager {
   MediaKitManager._init();
@@ -14,7 +14,7 @@ class MediaKitManager {
 
   CustomPlayer? _player;
 
-  final List<PlayItem> _players = [];
+  final List<pl.PlayItem> _players = [];
 
   bool _isCurrentlyPlaying = false;
 
@@ -27,12 +27,16 @@ class MediaKitManager {
     return _players[index].id;
   }
 
-  void play() {
+  Future<void> play() async {
     if (_isCurrentlyPlaying) return;
     if (!_isMounted) return;
+    await _player?.videoController.waitUntilFirstFrameRendered;
     _player
+      // ignore: unawaited_futures
       ?..setVolume(volume ? 100 : 0)
+      // ignore: unawaited_futures
       ..setPlaylistMode(PlaylistMode.single)
+      // ignore: unawaited_futures
       ..play();
     _isCurrentlyPlaying = true;
   }
@@ -60,38 +64,32 @@ class MediaKitManager {
     volume = !volume;
   }
 
-  VideoPlayerModel _createVideoPlayer(VideoModel videoModel) {
-    final p = CustomPlayer(videoModel.videoUrl);
-    final model = VideoPlayerModel(
-      id: videoModel.id,
+  pl.PlayItem _createVideoPlayer(Post post) {
+    final p = CustomPlayer(post.url);
+    final model = pl.PlayItem(
+      id: post.id,
       player: p,
+      placeholder: post.placeholder,
+      source: '',
     );
-    _videoPlayers.add(model);
+    _players.add(model);
     p.init();
     return model;
   }
 
-  VideoPlayerModel getVideoPlayerModelFromPostModel(VideoModel videoModel) {
-    final index = _videoPlayers.ext.indexOrNull((p0) => p0.id == videoModel.id);
-    if (index != null) return _videoPlayers[index];
-    return _createVideoPlayer(videoModel);
+  pl.PlayItem getPlayerModelFromPostModel(Post post) {
+    final index = _players.ext.indexOrNull((p0) => p0.id == post.id);
+    if (index != null) return _players[index];
+    return _createVideoPlayer(post);
   }
 
-  SoundPlayerModel _createSoundPlayer(SoundModel soundModel) {
-    final p = CustomPlayer(soundModel.soundUrl);
-    final model = SoundPlayerModel(id: soundModel.id, player: p);
-    _soundPlayers.add(model);
-    p.init();
-    return model;
+  Future<void> dispose(pl.Playable playable) async {
+    if (!playable.player.mounted) return;
+    await playable.player.dispose();
+    _players.remove(playable);
   }
 
-  SoundPlayerModel getSoundPlayerModelFromPostModel(SoundModel model) {
-    final index = _soundPlayers.ext.indexOrNull((p0) => p0.id == model.id);
-    if (index != null) return _soundPlayers[index];
-    return _createSoundPlayer(model);
-  }
-
-  bool get _isMounted => _player?.mounted == true;
+  bool get _isMounted => _player?.mounted ?? false;
 }
 
 class CustomPlayer extends Player with EquatableMixin {
